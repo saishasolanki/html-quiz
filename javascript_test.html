@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<head>
+    <style>
+        td {
+            border: 1px solid black;
+            padding: 10px;
+
+            width: 100px;
+            height: 50px;
+        }
+
+        .num {
+            background-color: rgb(109, 182, 233);
+        }
+
+        .den {
+            background-color: beige;
+        }
+    </style>
+
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>
+                Numerator
+            </td>
+            <td>
+                <input type="number" id="num1" value="2" onchange="printFractions()" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Denominator
+            </td>
+            <td>
+                <input type="number" id="den1" value="5" onchange="printFractions()" />
+            </td>
+        </tr>
+
+    </table>
+    <table id="fractions"></table>
+    <script>
+        function printFractions() {
+            const n1 = document.getElementById('num1').value;
+            const d1 = document.getElementById('den1').value;
+
+            const fTable = document.getElementById('fractions');
+            makeRows(n1, d1, fTable);
+        }
+
+        function makeRows(num, den, table) {
+
+            table.innerHTML = null;
+
+            if (num > den) {
+                return;
+            }
+
+            let numCount = 0;
+
+            for (let i = 0; i < den; i++) {
+                const row = document.createElement('tr');
+
+
+                const col = document.createElement('td');
+                if (numCount < num) {
+                    col.setAttribute("class", "num");
+                }
+                else {
+                    col.setAttribute("class", "den");
+
+                }
+                col.innerText = "";
+                row.append(col);
+                table.append(row);
+
+                numCount++;
+            }
+        }
+    </script>
+</body>
+
+</html>
